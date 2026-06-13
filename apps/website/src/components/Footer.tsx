@@ -94,7 +94,9 @@ export default function Footer() {
             </li>
             <li className="flex items-center space-x-2.5">
               <Mail size={16} className="text-[#3B82F6] flex-shrink-0" />
-              <span className="hover:text-white transition-colors">contact@rajdental.com</span>
+              <a href="mailto:dr.manojkumar29@gmail.com" className="hover:text-white transition-colors">
+                dr.manojkumar29@gmail.com
+              </a>
             </li>
           </ul>
         </div>
