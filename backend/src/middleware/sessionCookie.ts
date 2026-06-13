@@ -31,7 +31,7 @@ export function issueSessionCookie(req: Request, res: Response): string {
   res.cookie(COOKIE_NAME, sid, {
     httpOnly: true,                                           // Not accessible from JS — spoof-proof
     secure: process.env.NODE_ENV === 'production',           // HTTPS-only in production
-    sameSite: 'lax',                                         // Sent on same-site + top-level nav; blocks CSRF
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
     maxAge: SESSION_MAX_AGE_MS
   });
 
