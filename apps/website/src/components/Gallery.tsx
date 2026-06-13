@@ -145,9 +145,10 @@ export default function Gallery() {
             <div
               key={item.id}
               onClick={() => setLightboxItem(item)}
-              className="relative group aspect-[4/3] rounded-2xl overflow-hidden glass-panel p-1.5 shadow-xl cursor-zoom-in select-none"
+              className="group flex flex-col rounded-2xl overflow-hidden glass-panel p-2 shadow-xl cursor-zoom-in select-none border border-white/5 hover:border-white/15 transition-all duration-300"
             >
-              <div className="relative w-full h-full rounded-xl overflow-hidden bg-white/5">
+              {/* Image Container */}
+              <div className="relative aspect-[4/3] w-full rounded-xl overflow-hidden bg-white/5">
                 <img
                   src={item.imgUrl}
                   alt={item.title}
@@ -158,14 +159,20 @@ export default function Gallery() {
                   }`}
                   loading="lazy"
                 />
-                {/* Hover overlay details */}
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                  <span className="text-[10px] text-[#D4AF37] font-bold uppercase tracking-widest">{item.category}</span>
-                  <h4 className="text-white font-extrabold text-base mt-1 flex items-center justify-between">
-                    <span>{item.title}</span>
-                    <ZoomIn size={18} />
-                  </h4>
+                {/* Overlay with Zoom Icon on hover */}
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
+                  <ZoomIn className="text-white/0 group-hover:text-white/80 transition-all duration-300 transform scale-75 group-hover:scale-100" size={24} />
                 </div>
+              </div>
+
+              {/* Label Info Section - Always Visible */}
+              <div className="p-3 flex flex-col justify-between">
+                <span className="text-[9px] text-[#D4AF37] font-bold uppercase tracking-widest mb-1 block">
+                  {item.category}
+                </span>
+                <h4 className="text-white font-extrabold text-sm tracking-wide line-clamp-1">
+                  {item.title}
+                </h4>
               </div>
             </div>
           ))}
