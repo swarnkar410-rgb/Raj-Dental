@@ -12,6 +12,12 @@ const SESSION_MAX_AGE_MS = 2 * 60 * 60 * 1000;
  * Returns the sid string, or null if no cookie is present.
  */
 export function getSessionId(req: Request): string | null {
+  // Read from custom header to bypass mobile third-party cookie blocking
+  const headerSid = req.headers['x-session-id'] || req.headers['X-Session-ID'] || req.headers['X-Session-Id'];
+  if (headerSid && typeof headerSid === 'string') {
+    return headerSid;
+  }
+
   const cookies = (req as any).cookies as Record<string, string> | undefined;
   if (!cookies) return null;
   return cookies[COOKIE_NAME] || null;

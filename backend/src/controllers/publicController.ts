@@ -17,7 +17,7 @@ import { getSessionId, issueSessionCookie } from '../middleware/sessionCookie';
 // ─────────────────────────────────────────────────────────────────────────────
 export const initSession = (req: Request, res: Response): void => {
   const sid = issueSessionCookie(req, res);
-  res.status(200).json({ success: true, message: 'Session ready.', sessionReady: true });
+  res.status(200).json({ success: true, message: 'Session ready.', sessionReady: true, sessionId: sid });
 };
 
 // ─────────────────────────────────────────────────────────────────────────────

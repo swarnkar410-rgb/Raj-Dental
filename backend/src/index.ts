@@ -51,7 +51,8 @@ app.use(cors({
     if (allowedOrigins.includes(origin)) return callback(null, true);
     callback(new Error(`CORS: Origin '${origin}' is not allowed.`));
   },
-  credentials: true   // Required: allows the browser to send/receive cookies cross-origin
+  credentials: true,   // Required: allows the browser to send/receive cookies cross-origin
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Session-ID', 'x-session-id']
 }));
 app.use(express.json());
 

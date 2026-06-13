@@ -301,7 +301,10 @@ export default function BookingForm() {
       try {
         const res = await fetch(`${apiUrl}/public/slots/active-reservation?deviceId=${id}`, {
           credentials: 'include',
-          cache: 'no-store'
+          cache: 'no-store',
+          headers: {
+            'X-Session-ID': sessionStorage.getItem('rd_session_id') || ''
+          }
         });
         const data = await res.json();
         if (data.success && data.data) {
@@ -317,11 +320,17 @@ export default function BookingForm() {
       method: 'GET',
       credentials: 'include',
       cache: 'no-store'
-    }).then(() => {
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success && data.sessionId) {
+        sessionStorage.setItem('rd_session_id', data.sessionId);
+      }
       if (storedId) {
         checkActiveReservation(storedId);
       }
-    }).catch(() => {
+    })
+    .catch(() => {
       console.warn('Could not initialise booking session.');
       if (storedId) {
         checkActiveReservation(storedId);
@@ -367,7 +376,10 @@ export default function BookingForm() {
     try {
       const res = await fetch(`${apiUrl}/public/available-slots?date=${date}`, {
         credentials: 'include',
-        cache: 'no-store'
+        cache: 'no-store',
+        headers: {
+          'X-Session-ID': sessionStorage.getItem('rd_session_id') || ''
+        }
       });
       const data = await res.json();
       if (data.success) {
@@ -421,7 +433,10 @@ export default function BookingForm() {
     try {
       const res = await fetch(`${apiUrl}/public/slots/reserve`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'X-Session-ID': sessionStorage.getItem('rd_session_id') || ''
+        },
         credentials: 'include',
         body: JSON.stringify({
           date: formData.preferredDate,
@@ -467,7 +482,10 @@ export default function BookingForm() {
     try {
       await fetch(`${apiUrl}/public/slots/release`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'X-Session-ID': sessionStorage.getItem('rd_session_id') || ''
+        },
         credentials: 'include',
         body: JSON.stringify({
           date,
@@ -533,7 +551,10 @@ export default function BookingForm() {
     try {
       const res = await fetch(`${apiUrl}/public/patients/check-status?phone=${cleanPhone}`, {
         credentials: 'include',
-        cache: 'no-store'
+        cache: 'no-store',
+        headers: {
+          'X-Session-ID': sessionStorage.getItem('rd_session_id') || ''
+        }
       });
       const data = await res.json();
       if (data.success) {
@@ -579,7 +600,10 @@ export default function BookingForm() {
     try {
       const res = await fetch(`${apiUrl}/public/slots/active-reservation?phone=${cleanPhone}`, {
         credentials: 'include',
-        cache: 'no-store'
+        cache: 'no-store',
+        headers: {
+          'X-Session-ID': sessionStorage.getItem('rd_session_id') || ''
+        }
       });
       const data = await res.json();
       if (data.success && data.data) {
@@ -594,7 +618,10 @@ export default function BookingForm() {
         if (reservedSlot) {
           await fetch(`${apiUrl}/public/slots/associate-phone`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+              'Content-Type': 'application/json',
+              'X-Session-ID': sessionStorage.getItem('rd_session_id') || ''
+            },
             credentials: 'include',
             body: JSON.stringify({
               date: reservedSlot.date,
@@ -627,7 +654,10 @@ export default function BookingForm() {
       try {
         await fetch(`${apiUrl}/public/slots/associate-phone`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 
+            'Content-Type': 'application/json',
+            'X-Session-ID': sessionStorage.getItem('rd_session_id') || ''
+          },
           credentials: 'include',
           body: JSON.stringify({
             date: recoveryData.date,
@@ -765,7 +795,10 @@ export default function BookingForm() {
     try {
       const res = await fetch(`${apiUrl}/public/book-appointment`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'X-Session-ID': sessionStorage.getItem('rd_session_id') || ''
+        },
         credentials: 'include',
         body: JSON.stringify(finalizedData)
       });
