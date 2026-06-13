@@ -4,10 +4,53 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles, ArrowLeftRight } from 'lucide-react';
 
+interface TransformCase {
+  id: string;
+  title: string;
+  description: string;
+  beforeImg: string;
+  afterImg: string;
+  beforeLabel: string;
+  afterLabel: string;
+}
+
 export default function BeforeAfter() {
+  const [activeCase, setActiveCase] = useState('alignment');
   const [sliderPos, setSliderPos] = useState(50); // percentage 0 to 100
   const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const cases: TransformCase[] = [
+    {
+      id: 'alignment',
+      title: 'Smile Alignment',
+      description: 'Dramatic gap correction, teeth shaping, and smile harmony achieved using premium ceramic veneers.',
+      beforeImg: '/images/before1.jpeg',
+      afterImg: '/images/after1.jpeg',
+      beforeLabel: 'Before Alignment',
+      afterLabel: 'After Makeover'
+    },
+    {
+      id: 'implants',
+      title: 'Dental Implants',
+      description: 'Natural-looking complete tooth restoration correcting structures with medical-grade dental implants.',
+      beforeImg: '/images/Before2.jpeg',
+      afterImg: '/images/after2.jpeg',
+      beforeLabel: 'Before Implants',
+      afterLabel: 'After Restoration'
+    },
+    {
+      id: 'cosmetic',
+      title: 'Cosmetic Makeover',
+      description: 'Advanced dental smile designing correcting shade, texture, and tooth alignment.',
+      beforeImg: '/images/smile_before.png',
+      afterImg: '/images/smile_after.png',
+      beforeLabel: 'Before Treatment',
+      afterLabel: 'After Smile Design'
+    }
+  ];
+
+  const currentCase = cases.find(c => c.id === activeCase) || cases[0];
 
   const handleMove = (clientX: number) => {
     if (!containerRef.current) return;
@@ -39,13 +82,18 @@ export default function BeforeAfter() {
     };
   }, []);
 
+  // Reset slider position on case switch
+  useEffect(() => {
+    setSliderPos(50);
+  }, [activeCase]);
+
   return (
     <section id="smile-transform" className="py-24 bg-[#0B1220] relative overflow-hidden border-t border-white/5 z-20">
       {/* Background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#D4AF37]/5 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-4xl mx-auto px-6">
-        <div className="text-center space-y-4 mb-16">
+        <div className="text-center space-y-4 mb-10">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -71,6 +119,30 @@ export default function BeforeAfter() {
           </p>
         </div>
 
+        {/* Case Selector Tabs */}
+        <div className="flex justify-center flex-wrap gap-2 mb-6 relative z-30">
+          {cases.map((c) => (
+            <button
+              key={c.id}
+              onClick={() => setActiveCase(c.id)}
+              className={`px-5 py-2.5 rounded-xl border text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
+                activeCase === c.id
+                  ? 'bg-gradient-to-r from-[#145DA0] to-[#3B82F6] text-white border-[#3B82F6] shadow-[0_4px_12px_rgba(59,130,246,0.25)]'
+                  : 'bg-white/3 border-white/5 text-gray-400 hover:text-white hover:bg-white/5'
+              }`}
+            >
+              {c.title}
+            </button>
+          ))}
+        </div>
+
+        {/* Description of current case */}
+        <div className="text-center min-h-[40px] mb-8">
+          <p className="text-gray-300 text-sm max-w-lg mx-auto italic">
+            "{currentCase.description}"
+          </p>
+        </div>
+
         {/* Draggable Slider Container */}
         <div 
           ref={containerRef}
@@ -80,15 +152,16 @@ export default function BeforeAfter() {
           onTouchStart={() => setIsDragging(true)}
           className="relative w-full aspect-[16/10] sm:aspect-[16/9] rounded-3xl overflow-hidden cursor-ew-resize border border-white/10 select-none shadow-2xl glass-panel p-2"
         >
-          <div className="relative w-full h-full rounded-2xl overflow-hidden">
+          <div className="relative w-full h-full rounded-2xl overflow-hidden bg-[#0F172A]">
             {/* Before Image (Base) */}
             <img 
-              src="/images/smile_before.png" 
-              alt="Crooked Teeth Before"
+              key={`before-${activeCase}`}
+              src={currentCase.beforeImg} 
+              alt={currentCase.beforeLabel}
               className="absolute inset-0 w-full h-full object-cover pointer-events-none smooth-image"
             />
             <div className="absolute top-4 left-4 z-20 px-3 py-1 rounded-lg bg-black/60 backdrop-blur-sm border border-white/10 text-xs font-bold uppercase tracking-wider text-gray-300">
-              Before Treatment
+              {currentCase.beforeLabel}
             </div>
 
             {/* After Image (Overlay clipped by sliderPos) */}
@@ -97,13 +170,14 @@ export default function BeforeAfter() {
               style={{ clipPath: `inset(0 ${100 - sliderPos}% 0 0)` }}
             >
               <img 
-                src="/images/smile_after.png" 
-                alt="Perfect Teeth After"
+                key={`after-${activeCase}`}
+                src={currentCase.afterImg} 
+                alt={currentCase.afterLabel}
                 className="w-full h-full object-cover pointer-events-none smooth-image"
               />
             </div>
             <div className="absolute top-4 right-4 z-20 px-3 py-1 rounded-lg bg-[#145DA0]/80 backdrop-blur-sm border border-white/10 text-xs font-bold uppercase tracking-wider text-white">
-              After Makeover
+              {currentCase.afterLabel}
             </div>
 
             {/* Slider bar & handle */}

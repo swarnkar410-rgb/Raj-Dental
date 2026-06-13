@@ -9,8 +9,10 @@ import clinic2 from '../../../../assets/clinic/Clinic2.jpeg';
 import clinic3 from '../../../../assets/clinic/Clinic3.jpeg';
 import drManoj1 from '../../../../assets/doctors/Dr manoj.jpeg';
 import drManoj2 from '../../../../assets/doctors/Dr Manoj2.jpeg';
-import implantsBefore from '../../../../assets/patients/implants-before-01.svg';
-import implantsAfter from '../../../../assets/patients/implants-after-01.svg';
+import patientBefore1 from '../../../../assets/patients/before1.jpeg';
+import patientAfter1 from '../../../../assets/patients/after1.jpeg';
+import patientBefore2 from '../../../../assets/patients/Before2.jpeg';
+import patientAfter2 from '../../../../assets/patients/after2.jpeg';
 import certificate1 from '../../../../assets/certificates/Certificate1.jpeg';
 import certificate2 from '../../../../assets/certificates/Certificate2.jpeg';
 import certificate3 from '../../../../assets/certificates/Certificate3jpeg.jpeg';
@@ -64,29 +66,41 @@ export default function Gallery() {
     {
       id: 6,
       category: 'Patients',
-      title: 'Dental Implant Restoration (Before)',
-      imgUrl: getImgSrc(implantsBefore)
+      title: 'Smile Alignment (Before)',
+      imgUrl: getImgSrc(patientBefore1)
     },
     {
       id: 7,
       category: 'Patients',
-      title: 'Dental Implant Restoration (After)',
-      imgUrl: getImgSrc(implantsAfter)
+      title: 'Smile Alignment (After)',
+      imgUrl: getImgSrc(patientAfter1)
     },
     {
       id: 8,
+      category: 'Patients',
+      title: 'Dental Implant Restoration (Before)',
+      imgUrl: getImgSrc(patientBefore2)
+    },
+    {
+      id: 9,
+      category: 'Patients',
+      title: 'Dental Implant Restoration (After)',
+      imgUrl: getImgSrc(patientAfter2)
+    },
+    {
+      id: 10,
       category: 'Certificates',
       title: 'Clinic Accreditation Certificate',
       imgUrl: getImgSrc(certificate1)
     },
     {
-      id: 9,
+      id: 11,
       category: 'Certificates',
       title: 'Dental Seminar Qualification',
       imgUrl: getImgSrc(certificate2)
     },
     {
-      id: 10,
+      id: 12,
       category: 'Certificates',
       title: 'Official Clinical Recognition',
       imgUrl: getImgSrc(certificate3)
@@ -137,7 +151,9 @@ export default function Gallery() {
                 <img
                   src={item.imgUrl}
                   alt={item.title}
-                  className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 ${
+                  className={`w-full h-full transition-transform duration-500 group-hover:scale-105 ${
+                    item.id === 4 ? 'object-contain bg-[#070C16]' : 'object-cover'
+                  } ${
                     item.category !== 'Certificates' ? 'smooth-image' : ''
                   }`}
                   loading="lazy"

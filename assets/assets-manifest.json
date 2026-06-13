@@ -34,29 +34,29 @@
     }
   },
   "patients": {
-    "implantsBefore": {
-      "path": "assets/patients/implants-before-01.svg",
-      "type": "vector",
+    "before1": {
+      "path": "assets/patients/before1.jpeg",
+      "type": "raster",
+      "usage": "Smile Transform section, Patient Gallery",
+      "description": "Before image of smile alignment treatment"
+    },
+    "after1": {
+      "path": "assets/patients/after1.jpeg",
+      "type": "raster",
+      "usage": "Smile Transform section, Patient Gallery",
+      "description": "After image of smile alignment treatment"
+    },
+    "Before2": {
+      "path": "assets/patients/Before2.jpeg",
+      "type": "raster",
       "usage": "Smile Transform section, Patient Gallery",
       "description": "Before image of dental implants treatment"
     },
-    "implantsAfter": {
-      "path": "assets/patients/implants-after-01.svg",
-      "type": "vector",
+    "after2": {
+      "path": "assets/patients/after2.jpeg",
+      "type": "raster",
       "usage": "Smile Transform section, Patient Gallery",
       "description": "After image of dental implants treatment"
-    },
-    "sampleScan": {
-      "path": "assets/patients/sample-scan.svg",
-      "type": "vector",
-      "usage": "PMS Patient medical records",
-      "description": "Sample 3D CBCT scan for surgery planning"
-    },
-    "samplePrescription": {
-      "path": "assets/patients/sample-prescription.pdf",
-      "type": "document",
-      "usage": "PMS Patient prescriptions log",
-      "description": "Sample patient prescription report PDF"
     }
   },
   "certificates": {
