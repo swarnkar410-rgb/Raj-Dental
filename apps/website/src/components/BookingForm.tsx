@@ -300,7 +300,8 @@ export default function BookingForm() {
     const checkActiveReservation = async (id: string) => {
       try {
         const res = await fetch(`${apiUrl}/public/slots/active-reservation?deviceId=${id}`, {
-          credentials: 'include'
+          credentials: 'include',
+          cache: 'no-store'
         });
         const data = await res.json();
         if (data.success && data.data) {
@@ -314,7 +315,8 @@ export default function BookingForm() {
 
     fetch(`${apiUrl}/public/session`, {
       method: 'GET',
-      credentials: 'include'
+      credentials: 'include',
+      cache: 'no-store'
     }).then(() => {
       if (storedId) {
         checkActiveReservation(storedId);
@@ -364,7 +366,8 @@ export default function BookingForm() {
     
     try {
       const res = await fetch(`${apiUrl}/public/available-slots?date=${date}`, {
-        credentials: 'include'
+        credentials: 'include',
+        cache: 'no-store'
       });
       const data = await res.json();
       if (data.success) {
@@ -529,7 +532,8 @@ export default function BookingForm() {
 
     try {
       const res = await fetch(`${apiUrl}/public/patients/check-status?phone=${cleanPhone}`, {
-        credentials: 'include'
+        credentials: 'include',
+        cache: 'no-store'
       });
       const data = await res.json();
       if (data.success) {
@@ -574,7 +578,8 @@ export default function BookingForm() {
 
     try {
       const res = await fetch(`${apiUrl}/public/slots/active-reservation?phone=${cleanPhone}`, {
-        credentials: 'include'
+        credentials: 'include',
+        cache: 'no-store'
       });
       const data = await res.json();
       if (data.success && data.data) {
