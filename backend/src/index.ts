@@ -60,6 +60,15 @@ app.use(express.json());
 // Powers the HttpOnly session cookie (sid) used by slot reservation.
 app.use(cookieParser());
 
+// ── Disable Caching ────────────────────────────────────────────────────────
+// Prevents aggressive browser and CDN caching of session and available slots API responses.
+app.use((req, res, next) => {
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '0');
+  next();
+});
+
 // ── Global rate limiting ───────────────────────────────────────────────────
 // General guard: 200 requests per 15 minutes per IP.
 // The slot reservation endpoint has its own stricter limiter (10 req/min)
