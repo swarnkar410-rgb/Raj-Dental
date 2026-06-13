@@ -79,7 +79,14 @@ export default function Footer() {
           <ul className="space-y-3 text-xs sm:text-sm">
             <li className="flex items-start space-x-2.5">
               <MapPin size={16} className="text-[#D4AF37] flex-shrink-0 mt-0.5" />
-              <span>Raj Sadan, Jahaji Kothi Rd, Dariyapur Gola, Salimpur Ahra, Kadamkuan, Patna, 800004</span>
+              <a 
+                href="https://maps.google.com/?cid=9547074384954464116"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[#3B82F6] hover:underline transition-colors cursor-pointer text-left"
+              >
+                Raj Sadan, Jahaji Kothi Rd, Dariyapur Gola, Salimpur Ahra, Kadamkuan, Patna, 800004
+              </a>
             </li>
             <li className="flex items-center space-x-2.5">
               <Phone size={16} className="text-[#3B82F6] flex-shrink-0" />

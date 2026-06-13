@@ -34,13 +34,21 @@ export default function Contact() {
               <div className="h-[1px] bg-white/10 my-4" />
 
               {/* Location */}
-              <div className="flex items-start space-x-3.5">
-                <MapPin className="text-[#D4AF37] flex-shrink-0 mt-1" size={20} />
+              <a 
+                href="https://maps.google.com/?cid=9547074384954464116"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start space-x-3.5 group cursor-pointer"
+              >
+                <MapPin className="text-[#D4AF37] flex-shrink-0 mt-1 group-hover:text-white transition-colors" size={20} />
                 <div>
-                  <h4 className="font-extrabold text-white text-sm">Clinic Location</h4>
-                  <p className="text-gray-300 text-xs sm:text-sm mt-0.5 leading-relaxed">{address}</p>
+                  <h4 className="font-extrabold text-white text-sm group-hover:text-[#3B82F6] transition-colors flex items-center gap-1.5">
+                    <span>Clinic Location</span>
+                    <ExternalLink size={12} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </h4>
+                  <p className="text-gray-300 text-xs sm:text-sm mt-0.5 leading-relaxed group-hover:text-white transition-colors">{address}</p>
                 </div>
-              </div>
+              </a>
 
               {/* Contact numbers */}
               <div className="flex items-start space-x-3.5">
@@ -95,10 +103,16 @@ export default function Contact() {
 
           {/* Embedded Google Maps Box */}
           <div className="lg:col-span-7 glass-panel p-2 rounded-3xl overflow-hidden min-h-[350px] shadow-2xl relative">
-            <div className="absolute top-4 left-4 z-10 bg-black/60 backdrop-blur-sm border border-white/10 px-3 py-1.5 rounded-lg flex items-center space-x-1.5 text-xs text-white">
-              <MapPin size={12} className="text-[#D4AF37]" />
-              <span className="font-bold">Patna, Bihar 800004</span>
-            </div>
+            <a 
+              href="https://maps.google.com/?cid=9547074384954464116"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute top-4 left-4 z-10 bg-[#3B82F6] hover:bg-[#2563EB] border border-blue-400/30 px-3.5 py-2 rounded-xl flex items-center space-x-2 text-xs text-white font-bold transition-all shadow-lg hover:shadow-blue-500/20 active:scale-95 cursor-pointer animate-pulse hover:animate-none"
+            >
+              <MapPin size={14} className="text-white" />
+              <span>Open in Google Maps</span>
+              <ExternalLink size={12} className="text-white/85" />
+            </a>
             {/* Real embedded Google Maps iframe for Rajdhani Market / Kadamkuan / Patna area */}
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3597.7143731997717!2d85.1511946!3d25.6144058!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ed58f130965c25%3A0x847def03856f974!2sRaj+Dental+%26+Implant+Hospital!5e0!3m2!1sen!2sin!4v1717800000000!5m2!1sen!2sin"
