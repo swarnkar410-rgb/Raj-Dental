@@ -80,7 +80,7 @@ export default function Footer() {
             <li className="flex items-start space-x-2.5">
               <MapPin size={16} className="text-[#D4AF37] flex-shrink-0 mt-0.5" />
               <a 
-                href="https://maps.google.com/?cid=9547074384954464116"
+                href="https://www.google.com/maps/search/?api=1&query=Raj+Dental+%26+Implant+Hospital,+Jahaji+Kothi+Road,+Patna,+Bihar+800004"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-[#3B82F6] hover:underline transition-colors cursor-pointer text-left"

@@ -35,7 +35,7 @@ export default function Contact() {
 
               {/* Location */}
               <a 
-                href="https://maps.google.com/?cid=9547074384954464116"
+                href="https://www.google.com/maps/search/?api=1&query=Raj+Dental+%26+Implant+Hospital,+Jahaji+Kothi+Road,+Patna,+Bihar+800004"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-start space-x-3.5 group cursor-pointer"
@@ -104,7 +104,7 @@ export default function Contact() {
           {/* Embedded Google Maps Box */}
           <div className="lg:col-span-7 glass-panel p-2 rounded-3xl overflow-hidden min-h-[350px] shadow-2xl relative">
             <a 
-              href="https://maps.google.com/?cid=9547074384954464116"
+              href="https://www.google.com/maps/search/?api=1&query=Raj+Dental+%26+Implant+Hospital,+Jahaji+Kothi+Road,+Patna,+Bihar+800004"
               target="_blank"
               rel="noopener noreferrer"
               className="absolute top-4 left-4 z-10 bg-[#3B82F6] hover:bg-[#2563EB] border border-blue-400/30 px-3.5 py-2 rounded-xl flex items-center space-x-2 text-xs text-white font-bold transition-all shadow-lg hover:shadow-blue-500/20 active:scale-95 cursor-pointer animate-pulse hover:animate-none"
