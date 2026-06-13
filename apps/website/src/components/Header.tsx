@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Calendar } from 'lucide-react';
-import logoLight from '../../../../assets/pms/logo-light.png';
+import logoLight from '../../../../assets/pms/logo.jpeg';
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);

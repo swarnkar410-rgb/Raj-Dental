@@ -27,8 +27,8 @@ export default function BeforeAfter() {
       description: 'Dramatic gap correction, teeth shaping, and smile harmony achieved using premium ceramic veneers.',
       beforeImg: '/images/before1.jpeg',
       afterImg: '/images/after1.jpeg',
-      beforeLabel: 'Before Alignment',
-      afterLabel: 'After Makeover'
+      beforeLabel: 'BEFORE TREATMENT',
+      afterLabel: 'AFTER SMILE DESIGN'
     },
     {
       id: 'implants',
@@ -36,8 +36,8 @@ export default function BeforeAfter() {
       description: 'Natural-looking complete tooth restoration correcting structures with medical-grade dental implants.',
       beforeImg: '/images/Before2.jpeg',
       afterImg: '/images/after2.jpeg',
-      beforeLabel: 'Before Implants',
-      afterLabel: 'After Restoration'
+      beforeLabel: 'BEFORE TREATMENT',
+      afterLabel: 'AFTER SMILE DESIGN'
     },
     {
       id: 'cosmetic',
@@ -45,8 +45,8 @@ export default function BeforeAfter() {
       description: 'Advanced dental smile designing correcting shade, texture, and tooth alignment.',
       beforeImg: '/images/smile_before.png',
       afterImg: '/images/smile_after.png',
-      beforeLabel: 'Before Treatment',
-      afterLabel: 'After Smile Design'
+      beforeLabel: 'BEFORE TREATMENT',
+      afterLabel: 'AFTER SMILE DESIGN'
     }
   ];
 
@@ -88,7 +88,7 @@ export default function BeforeAfter() {
   }, [activeCase]);
 
   return (
-    <section id="smile-transform" className="py-24 bg-[#0B1220] relative overflow-hidden border-t border-white/5 z-20">
+    <section id="smile-transform" className="py-24 bg-[#0d1b2a] relative overflow-hidden border-t border-white/5 z-20">
       {/* Background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#D4AF37]/5 rounded-full blur-[120px] pointer-events-none" />
 
@@ -102,7 +102,7 @@ export default function BeforeAfter() {
             className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-white/5 border border-white/10"
           >
             <Sparkles className="text-[#D4AF37]" size={14} />
-            <span className="text-xs text-gray-200 font-semibold uppercase tracking-widest">Interactive Comparison</span>
+            <span className="text-xs text-gray-200 font-semibold uppercase tracking-widest">INTERACTIVE COMPARISON</span>
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -113,8 +113,8 @@ export default function BeforeAfter() {
           >
             Smile Transformations
           </motion.h2>
-          <div className="w-12 h-1 bg-[#D4AF37] mx-auto rounded-full" />
-          <p className="text-gray-400 text-sm max-w-md mx-auto">
+          <div className="w-16 h-1 bg-[#D4AF37] mx-auto rounded-full" />
+          <p className="text-gray-400 text-sm max-w-md mx-auto mt-4">
             Drag the slider to witness the dramatic before and after results of our cosmetic implants and veneers.
           </p>
         </div>

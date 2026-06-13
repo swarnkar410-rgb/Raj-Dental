@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Mail, Lock, ShieldAlert, Loader2 } from 'lucide-react';
 import { apiRequest, saveTokens } from '../../utils/api';
 
-import logoLight from '../../../../../assets/pms/logo-light.png';
+import logoLight from '../../../../../assets/pms/logo.jpeg';
 
 export default function Login() {
   const router = useRouter();

@@ -22,7 +22,7 @@ import { getTokens, clearTokens, apiRequest } from '../../utils/api';
 import { AnimatePresence, motion } from 'framer-motion';
 import AppointmentReviewDrawer from '../../components/AppointmentReviewDrawer';
 
-import logoLight from '../../../../../assets/pms/logo-light.png';
+import logoLight from '../../../../../assets/pms/logo.jpeg';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Shared notification context helpers

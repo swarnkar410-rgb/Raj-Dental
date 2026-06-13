@@ -80,23 +80,11 @@
     }
   },
   "pms": {
-    "logoDark": {
-      "path": "assets/pms/logo-dark.svg",
-      "type": "vector",
-      "usage": "PMS Dark Mode Header & Branding",
-      "description": "Clinic logo in dark theme variation"
-    },
-    "logoLight": {
-      "path": "assets/pms/logo-light.svg",
-      "type": "vector",
-      "usage": "PMS Light Mode Header & Invoicing",
-      "description": "Clinic logo in light theme variation"
-    },
-    "serviceImplantIcon": {
-      "path": "assets/pms/service-implant-icon.svg",
-      "type": "vector",
-      "usage": "Services section list, Treatment explorer card",
-      "description": "Vector icon representing dental implants treatment"
+    "logo": {
+      "path": "assets/pms/logo.jpeg",
+      "type": "raster",
+      "usage": "Website & PMS Logo branding",
+      "description": "Raj Dental & Implant Hospital logo in JPEG format"
     }
   }
 }
