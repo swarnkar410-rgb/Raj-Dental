@@ -32,8 +32,25 @@ app.set('trust proxy', 1);
 
 // ── Core middleware ────────────────────────────────────────────────────────
 app.use(helmet());
+// ── CORS ──────────────────────────────────────────────────────────────────
+// ALLOWED_ORIGINS = comma-separated list of trusted frontend URLs.
+// e.g. "http://localhost:3000,http://localhost:3001,https://rajdental.in"
+const rawOrigins = process.env.ALLOWED_ORIGINS || '';
+if (!rawOrigins && process.env.NODE_ENV === 'production') {
+  console.warn('[WARN] ALLOWED_ORIGINS is not set. All cross-origin requests will be blocked.');
+}
+const allowedOrigins = rawOrigins
+  .split(',')
+  .map(o => o.trim())
+  .filter(Boolean);
+
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002', 'https://rajdental.com', 'https://app.rajdental.com'],
+  origin: (origin, callback) => {
+    // Allow non-browser requests (curl, Postman, server-to-server) in dev
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    callback(new Error(`CORS: Origin '${origin}' is not allowed.`));
+  },
   credentials: true   // Required: allows the browser to send/receive cookies cross-origin
 }));
 app.use(express.json());

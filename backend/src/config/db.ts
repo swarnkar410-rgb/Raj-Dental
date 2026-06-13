@@ -2,7 +2,10 @@ import mongoose from 'mongoose';
 
 export const connectDB = async () => {
   try {
-    const connStr = process.env.MONGO_URI || 'mongodb://localhost:27017/raj_dental';
+    if (!process.env.MONGO_URI) {
+      throw new Error('MONGO_URI environment variable is not set. Aborting server startup.');
+    }
+    const connStr = process.env.MONGO_URI;
     console.log(`Attempting to connect to MongoDB...`);
     const conn = await mongoose.connect(connStr);
     console.log(`MongoDB Connected: ${conn.connection.host}`);
