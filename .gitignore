@@ -1,0 +1,134 @@
+# =============================================================================
+#  RAJ DENTAL DMS — ROOT .gitignore
+#  Covers: Node.js · Next.js · TypeScript · MongoDB · OS · Editor
+# =============================================================================
+
+
+# ── Environment & Secrets ────────────────────────────────────────────────────
+.env
+.env.local
+.env.development
+.env.development.local
+.env.test
+.env.test.local
+.env.production
+.env.production.local
+.env.staging
+*.env
+
+
+# ── Node / npm / yarn / pnpm ─────────────────────────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.npm
+.yarn/
+.pnp.*
+package-lock.json.bak
+
+
+# ── TypeScript Build Output ──────────────────────────────────────────────────
+dist/
+build/
+out/
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+
+
+# ── Next.js ──────────────────────────────────────────────────────────────────
+.next/
+.next/cache/
+next-env.d.ts
+
+
+# ── Express / Backend ────────────────────────────────────────────────────────
+backend/dist/
+backend/logs/
+logs/
+*.log
+
+
+# ── Database & Uploads ───────────────────────────────────────────────────────
+uploads/
+*.sqlite
+*.sqlite3
+*.db
+dump.rdb
+
+
+# ── Coverage & Testing ───────────────────────────────────────────────────────
+coverage/
+.nyc_output/
+*.lcov
+jest.config.*.local.*
+
+
+# ── Cache Directories ────────────────────────────────────────────────────────
+.cache/
+.parcel-cache/
+.turbo/
+.eslintcache
+.stylelintcache
+
+
+# ── Operating System ─────────────────────────────────────────────────────────
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+*~
+
+
+# ── Editors & IDEs ───────────────────────────────────────────────────────────
+# VS Code
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/launch.json
+
+# JetBrains (WebStorm, IntelliJ)
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Vim / Neovim
+*.swp
+*.swo
+*.swn
+Session.vim
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Emacs
+*~
+\#*\#
+.\#*
+
+
+# ── Miscellaneous ────────────────────────────────────────────────────────────
+*.pem
+*.key
+*.cert
+*.crt
+*.p12
+*.pfx
+.vercel
+.netlify

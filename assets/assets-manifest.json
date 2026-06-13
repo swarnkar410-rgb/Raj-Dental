@@ -1,0 +1,102 @@
+{
+  "clinic": {
+    "lobby": {
+      "path": "assets/clinic/Clinic1.jpeg",
+      "type": "raster",
+      "usage": "Clinic Gallery",
+      "description": "Clinic lobby and front desk reception area"
+    },
+    "setup": {
+      "path": "assets/clinic/Clinic2.jpeg",
+      "type": "raster",
+      "usage": "Clinic Gallery",
+      "description": "Modern clinic room setup"
+    },
+    "treatment": {
+      "path": "assets/clinic/Clinic3.jpeg",
+      "type": "raster",
+      "usage": "Clinic Gallery",
+      "description": "Advanced dental treatment room"
+    }
+  },
+  "doctors": {
+    "profile": {
+      "path": "assets/doctors/Dr manoj.jpeg",
+      "type": "raster",
+      "usage": "About Doctor section, Doctor Gallery",
+      "description": "Doctor portrait profile picture of Dr. Manoj Kumar"
+    },
+    "clinical": {
+      "path": "assets/doctors/Dr Manoj2.jpeg",
+      "type": "raster",
+      "usage": "Doctor Gallery",
+      "description": "Doctor Manoj Kumar conducting clinical session"
+    }
+  },
+  "patients": {
+    "implantsBefore": {
+      "path": "assets/patients/implants-before-01.svg",
+      "type": "vector",
+      "usage": "Smile Transform section, Patient Gallery",
+      "description": "Before image of dental implants treatment"
+    },
+    "implantsAfter": {
+      "path": "assets/patients/implants-after-01.svg",
+      "type": "vector",
+      "usage": "Smile Transform section, Patient Gallery",
+      "description": "After image of dental implants treatment"
+    },
+    "sampleScan": {
+      "path": "assets/patients/sample-scan.svg",
+      "type": "vector",
+      "usage": "PMS Patient medical records",
+      "description": "Sample 3D CBCT scan for surgery planning"
+    },
+    "samplePrescription": {
+      "path": "assets/patients/sample-prescription.pdf",
+      "type": "document",
+      "usage": "PMS Patient prescriptions log",
+      "description": "Sample patient prescription report PDF"
+    }
+  },
+  "certificates": {
+    "accreditation": {
+      "path": "assets/certificates/Certificate1.jpeg",
+      "type": "raster",
+      "usage": "Certificates Gallery",
+      "description": "Clinic accreditation certificate"
+    },
+    "qualification": {
+      "path": "assets/certificates/Certificate2.jpeg",
+      "type": "raster",
+      "usage": "Certificates Gallery",
+      "description": "Doctor qualification seminar certificate"
+    },
+    "recognition": {
+      "path": "assets/certificates/Certificate3jpeg.jpeg",
+      "type": "raster",
+      "usage": "Certificates Gallery",
+      "description": "Official clinical recognition award"
+    }
+  },
+  "pms": {
+    "logoDark": {
+      "path": "assets/pms/logo-dark.svg",
+      "type": "vector",
+      "usage": "PMS Dark Mode Header & Branding",
+      "description": "Clinic logo in dark theme variation"
+    },
+    "logoLight": {
+      "path": "assets/pms/logo-light.svg",
+      "type": "vector",
+      "usage": "PMS Light Mode Header & Invoicing",
+      "description": "Clinic logo in light theme variation"
+    },
+    "serviceImplantIcon": {
+      "path": "assets/pms/service-implant-icon.svg",
+      "type": "vector",
+      "usage": "Services section list, Treatment explorer card",
+      "description": "Vector icon representing dental implants treatment"
+    }
+  }
+}

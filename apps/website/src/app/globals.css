@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&display=swap');
+
+@import "tailwindcss";
+
+:root {
+  --background: #0B1220;
+  --foreground: #FFFFFF;
+  --primary: #145DA0;
+  --accent: #3B82F6;
+  --gold: #D4AF37;
+}
+
+@theme {
+  --color-bg-dark: #0B1220;
+  --color-primary-blue: #145DA0;
+  --color-accent-blue: #3B82F6;
+  --color-gold-accent: #D4AF37;
+  
+  --font-sans: 'Manrope', 'Inter', sans-serif;
+  --font-serif: 'Playfair Display', serif;
+}
+
+body {
+  background-color: #0B1220;
+  color: #FFFFFF;
+  font-family: 'Manrope', 'Inter', sans-serif;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/* Custom Utilities */
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.glass-panel-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-panel-hover:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(59, 130, 246, 0.3);
+  box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.25);
+  transform: translateY(-4px);
+}
+
+.glass-panel-gold {
+  background: rgba(212, 175, 55, 0.02);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+.glass-panel-gold-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-panel-gold-hover:hover {
+  background: rgba(212, 175, 55, 0.05);
+  border-color: rgba(212, 175, 55, 0.4);
+  box-shadow: 0 10px 30px -10px rgba(212, 175, 55, 0.2);
+  transform: translateY(-4px);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0B1220;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(59, 130, 246, 0.5);
+}
+
+/* Animations */
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(4deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.15; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(1.05); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 5s ease-in-out infinite;
+}
+
+.glow-highlight {
+  animation: pulse-glow 2s ease-in-out;
+}
+
+/* Custom Selection */
+::selection {
+  background: rgba(59, 130, 246, 0.3);
+  color: #FFFFFF;
+}
+
+/* Smooths out over-sharpened, high-contrast photos */
+.smooth-image {
+  filter: blur(0.3px) contrast(0.96) saturate(0.96) brightness(1.01);
+  /* Hardware acceleration for smooth scaling & filter transitions */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+

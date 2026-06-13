@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&display=swap');
+
+@import "tailwindcss";
+
+:root {
+  --background: #0B1220;
+  --foreground: #FFFFFF;
+  --primary: #145DA0;
+  --accent: #3B82F6;
+  --gold: #D4AF37;
+}
+
+@theme {
+  --color-bg-dark: #0B1220;
+  --color-bg-darker: #070C16;
+  --color-primary-blue: #145DA0;
+  --color-accent-blue: #3B82F6;
+  --color-gold-accent: #D4AF37;
+  
+  --font-sans: 'Manrope', 'Inter', sans-serif;
+}
+
+body {
+  background-color: #0B1220;
+  color: #FFFFFF;
+  font-family: 'Manrope', 'Inter', sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #070C16;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(59, 130, 246, 0.4);
+}
+
+/* Dashboard Panel Styles */
+.panel-card {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 1rem;
+}
+
+/* Teeth odontogram states */
+.tooth-healthy {
+  fill: #FFFFFF;
+  stroke: #AECFFF;
+}
+.tooth-caries {
+  fill: #EF4444; /* red */
+  stroke: #B91C1C;
+}
+.tooth-root-canal {
+  fill: #A855F7; /* purple */
+  stroke: #7E22CE;
+}
+.tooth-crown {
+  fill: #F59E0B; /* amber/yellow */
+  stroke: #D97706;
+}
+.tooth-extraction {
+  fill: #6B7280; /* grey */
+  stroke: #374151;
+}
+.tooth-implant {
+  fill: #3B82F6; /* blue */
+  stroke: #1D4ED8;
+}
+.tooth-braces {
+  fill: #10B981; /* green */
+  stroke: #047857;
+}
+
+/* Print Invoice Stylesheet overrides */
+@media print {
+  body {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  .print-card {
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+  }
+}

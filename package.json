@@ -1,0 +1,20 @@
+{
+  "name": "raj-dental-workspace",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/website",
+    "apps/pms",
+    "backend",
+    "shared"
+  ],
+  "scripts": {
+    "dev:website": "npm run dev --workspace=apps/website",
+    "dev:pms": "npm run dev --workspace=apps/pms",
+    "dev:backend": "npm run dev --workspace=backend",
+    "build:website": "npm run build --workspace=apps/website",
+    "build:pms": "npm run build --workspace=apps/pms",
+    "build:backend": "npm run build --workspace=backend",
+    "seed": "npm run seed --workspace=backend"
+  }
+}
