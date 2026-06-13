@@ -15,7 +15,8 @@ import {
   Check,
   X,
   Clock,
-  Inbox
+  Inbox,
+  Menu
 } from 'lucide-react';
 import { getTokens, clearTokens, apiRequest } from '../../utils/api';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -34,6 +35,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const router = useRouter();
   const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Close mobile drawer when route pathname changes
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [pathname]);
 
   // ── Notification state ───────────────────────────────────────────────────
   // Only holds PENDING (actionable) requests — processed ones are excluded.
@@ -166,8 +173,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
   return (
     <div className="flex h-screen bg-[#070C16] text-white overflow-hidden">
-      {/* Sidebar Panel */}
-      <aside className="w-64 bg-[#0B1220] border-r border-white/5 flex flex-col justify-between h-full no-print">
+      {/* Desktop Sidebar Panel */}
+      <aside className="hidden lg:flex w-64 bg-[#0B1220] border-r border-white/5 flex-col justify-between h-full no-print">
         {/* Top brand header */}
         <div>
           <div className="p-6 border-b border-white/5 flex items-center space-x-3">
@@ -179,7 +186,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               />
               <div className="absolute -bottom-0.5 left-1 right-1 h-[2px] bg-[#D4AF37] rounded-full z-10"></div>
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col text-left">
               <span className="font-bold text-white tracking-wide text-sm leading-tight">RAJ DENTAL</span>
               <span className="text-[9px] text-gray-500 tracking-wider font-semibold uppercase">PMS Portal</span>
             </div>
@@ -213,7 +220,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             <div className="p-2 bg-gradient-to-tr from-[#145DA0] to-[#3B82F6] rounded-lg text-white">
               <UserCheck size={16} />
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col text-left">
               <span className="text-xs font-bold text-white leading-none">Dr. Manoj Kumar</span>
               <span className="text-[9px] text-gray-500 font-semibold tracking-wider uppercase mt-1">Lead Surgeon</span>
             </div>
@@ -229,13 +236,121 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         </div>
       </aside>
 
+      {/* Mobile Sidebar Overlay Drawer */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setMobileMenuOpen(false)}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 lg:hidden no-print"
+            />
+            
+            {/* Drawer Content */}
+            <motion.aside
+              initial={{ x: '-100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '-100%' }}
+              transition={{ type: 'spring', damping: 28, stiffness: 220 }}
+              className="fixed inset-y-0 left-0 w-64 bg-[#0B1220] border-r border-white/5 flex flex-col justify-between h-full z-50 lg:hidden no-print shadow-2xl"
+            >
+              <div>
+                {/* Brand header with close button */}
+                <div className="p-6 border-b border-white/5 flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    <div className="relative w-9 h-9 flex-shrink-0 bg-white/5 border border-white/10 rounded-xl p-1.5 shadow-sm">
+                      <img 
+                        src={typeof logoLight === 'object' ? logoLight.src : logoLight} 
+                        alt="Raj Dental Logo" 
+                        className="w-full h-full object-contain" 
+                      />
+                      <div className="absolute -bottom-0.5 left-1 right-1 h-[2px] bg-[#D4AF37] rounded-full z-10"></div>
+                    </div>
+                    <div className="flex flex-col text-left">
+                      <span className="font-bold text-white tracking-wide text-sm leading-tight">RAJ DENTAL</span>
+                      <span className="text-[9px] text-gray-500 tracking-wider font-semibold uppercase">PMS Portal</span>
+                    </div>
+                  </div>
+                  <button 
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="p-1.5 rounded-lg bg-white/5 text-gray-400 hover:text-white hover:bg-white/10 transition-all cursor-pointer"
+                  >
+                    <X size={18} />
+                  </button>
+                </div>
+
+                {/* Navigation Links */}
+                <nav className="p-4 space-y-1.5">
+                  {navItems.map((item) => {
+                    const isActive = pathname === item.path || (item.path !== '/dashboard' && pathname.startsWith(item.path));
+                    return (
+                      <button
+                        key={item.label}
+                        onClick={() => {
+                          router.push(item.path);
+                          setMobileMenuOpen(false);
+                        }}
+                        className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all cursor-pointer ${
+                          isActive
+                            ? 'bg-gradient-to-r from-[#145DA0]/20 to-[#3B82F6]/20 border-l-4 border-[#3B82F6] text-white'
+                            : 'text-gray-400 hover:text-white hover:bg-white/5'
+                        }`}
+                      >
+                        <span className={isActive ? 'text-[#3B82F6]' : 'text-gray-400'}>{item.icon}</span>
+                        <span>{item.label}</span>
+                      </button>
+                    );
+                  })}
+                </nav>
+              </div>
+
+              {/* Bottom doctor details & logout */}
+              <div className="p-4 border-t border-white/5 space-y-4">
+                <div className="flex items-center space-x-3 px-3 py-2 rounded-xl bg-white/3 border border-white/5">
+                  <div className="p-2 bg-gradient-to-tr from-[#145DA0] to-[#3B82F6] rounded-lg text-white">
+                    <UserCheck size={16} />
+                  </div>
+                  <div className="flex flex-col text-left">
+                    <span className="text-xs font-bold text-white leading-none">Dr. Manoj Kumar</span>
+                    <span className="text-[9px] text-gray-500 font-semibold tracking-wider uppercase mt-1">Lead Surgeon</span>
+                  </div>
+                </div>
+
+                <button
+                  onClick={handleLogout}
+                  className="w-full flex items-center justify-center space-x-2 py-3 rounded-xl border border-red-500/10 hover:border-red-500/30 bg-red-500/5 hover:bg-red-500/10 text-red-300 hover:text-red-200 text-xs font-bold transition-all cursor-pointer"
+                >
+                  <LogOut size={14} />
+                  <span>Sign Out</span>
+                </button>
+              </div>
+            </motion.aside>
+          </>
+        )}
+      </AnimatePresence>
+
       {/* Main content right pane */}
       <div className="flex-1 flex flex-col h-full overflow-hidden">
         {/* Top Header navbar */}
-        <header className="h-16 bg-[#0B1220] border-b border-white/5 px-8 flex items-center justify-between no-print z-40">
-          <div>
-            <h2 className="text-sm font-bold text-gray-400">Welcome back, Dr. Manoj</h2>
-            <p className="text-[10px] text-gray-500 font-semibold uppercase tracking-wider mt-0.5">Raj Dental &amp; Implant Hospital</p>
+        <header className="h-16 bg-[#0B1220] border-b border-white/5 px-4 sm:px-8 flex items-center justify-between no-print z-40">
+          <div className="flex items-center">
+            {/* Hamburger button */}
+            <button
+              onClick={() => setMobileMenuOpen(true)}
+              className="p-2.5 mr-3 bg-white/3 hover:bg-white/6 border border-white/5 rounded-xl text-gray-300 hover:text-white transition-all cursor-pointer lg:hidden"
+            >
+              <Menu size={18} />
+            </button>
+            <div className="flex flex-col text-left">
+              <h2 className="text-xs sm:text-sm font-bold text-gray-400 leading-tight">Welcome back, Dr. Manoj</h2>
+              <p className="text-[9px] sm:text-[10px] text-gray-500 font-semibold uppercase tracking-wider mt-0.5">
+                <span className="inline sm:hidden">Raj Dental &amp; Hospital</span>
+                <span className="hidden sm:inline">Raj Dental &amp; Implant Hospital</span>
+              </p>
+            </div>
           </div>
 
           {/* Notification Bell */}
@@ -269,7 +384,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -8, scale: 0.97 }}
                   transition={{ duration: 0.15 }}
-                  className="absolute right-0 top-full mt-2 w-80 bg-[#0B1220] border border-white/10 rounded-2xl shadow-2xl overflow-hidden z-50 p-4 space-y-3"
+                  className="absolute right-0 top-full mt-2 w-80 max-w-[calc(100vw-2rem)] bg-[#0B1220] border border-white/10 rounded-2xl shadow-2xl overflow-hidden z-50 p-4 space-y-3"
                 >
                   <div className="flex justify-between items-center border-b border-white/5 pb-2">
                     <h4 className="font-extrabold text-sm text-white">Online Booking Requests</h4>
@@ -324,7 +439,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         </header>
 
         {/* Dynamic Inner views */}
-        <main className="flex-1 overflow-y-auto bg-[#070C16] p-8">
+        <main className="flex-1 overflow-y-auto bg-[#070C16] p-4 sm:p-6 lg:p-8">
           {children}
         </main>
       </div>
@@ -353,7 +468,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             initial={{ opacity: 0, y: 50, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.9 }}
-            className="fixed bottom-6 right-6 z-[200] p-4 bg-[#0F172A] border border-[#10B981]/30 rounded-2xl shadow-2xl flex items-center space-x-3 text-white max-w-sm"
+            className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:bottom-6 z-[200] p-4 bg-[#0F172A] border border-[#10B981]/30 rounded-2xl shadow-2xl flex items-center space-x-3 text-white max-w-none sm:max-w-sm"
           >
             <div className="p-2 bg-[#10B981]/15 text-[#10B981] rounded-xl flex-shrink-0">
               <Check size={18} />

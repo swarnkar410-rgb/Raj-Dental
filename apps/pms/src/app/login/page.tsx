@@ -9,8 +9,8 @@ import logoLight from '../../../../../assets/pms/logo-light.png';
 
 export default function Login() {
   const router = useRouter();
-  const [email, setEmail] = useState('manoj@rajdental.com');
-  const [password, setPassword] = useState('password123');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -96,7 +96,7 @@ export default function Login() {
               <label className="text-xs font-bold text-gray-300 uppercase tracking-wider block">Password</label>
               <button 
                 type="button" 
-                onClick={() => alert('Default credentials are: manoj@rajdental.com / password123')}
+                onClick={() => alert('Default credentials are: manoj@rajdental.com / manoj@456')}
                 className="text-[10px] font-bold text-[#D4AF37] hover:underline"
               >
                 Forgot Password?

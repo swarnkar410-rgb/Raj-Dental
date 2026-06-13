@@ -257,92 +257,94 @@ export default function BillingPage() {
         const sortedInvoices = getSortedInvoices();
         return (
           <div className="panel-card overflow-hidden shadow-2xl">
-            <table className="w-full text-left text-xs sm:text-sm border-collapse">
-              <thead>
-                <tr className="bg-white/5 border-b border-white/5 text-gray-400 uppercase text-[10px] font-bold tracking-wider">
-                  <th className="p-4 sm:p-5">Invoice #</th>
-                  <th className="p-4 sm:p-5">Patient</th>
-                  <th className="p-4 sm:p-5">Issue Date</th>
-                  <th className="p-4 sm:p-5">Total Amount</th>
-                  <th className="p-4 sm:p-5">Paid Amount</th>
-                  <th className="p-4 sm:p-5">Balance Due</th>
-                  <th className="p-4 sm:p-5">Status</th>
-                  <th className="p-4 sm:p-5 text-right">Actions</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-white/5 text-gray-300">
-                {sortedInvoices.map((inv) => (
-                  <tr key={inv._id} className="hover:bg-white/3 transition-colors">
-                    <td className="p-4 sm:p-5 font-bold text-white">
-                      <button
-                        onClick={() => router.push(`/dashboard/billing/invoice/${inv._id}`)}
-                        className="hover:text-[#3B82F6] transition-colors font-extrabold text-left cursor-pointer"
-                      >
-                        {inv.invoiceNumber}
-                      </button>
-                    </td>
-                    <td className="p-4 sm:p-5">
-                      {inv.patientId ? (
-                        <button
-                          onClick={() => router.push(`/dashboard/patients/${inv.patientId._id}`)}
-                          className="hover:text-[#3B82F6] hover:underline font-bold text-left cursor-pointer"
-                        >
-                          {inv.patientId.name}
-                        </button>
-                      ) : (
-                        <span className="italic text-gray-500">Deleted Patient</span>
-                      )}
-                    </td>
-                    <td className="p-4 sm:p-5 text-gray-200 font-extrabold text-xs tracking-wide">
-                      {formatDateToDMY(inv.issueDate)}
-                    </td>
-                    <td className="p-4 sm:p-5 font-bold text-white">₹{inv.totalAmount.toLocaleString('en-IN')}</td>
-                    <td className="p-4 sm:p-5 font-bold text-emerald-400">₹{(inv.amountPaid || 0).toLocaleString('en-IN')}</td>
-                    <td className="p-4 sm:p-5 font-bold text-white">
-                      {inv.balanceDue > 0 ? (
-                        <span className="text-red-400 font-semibold">₹{inv.balanceDue.toLocaleString('en-IN')}</span>
-                      ) : (
-                        <span className="text-emerald-400 font-semibold">₹0</span>
-                      )}
-                    </td>
-                    <td className="p-4 sm:p-5">
-                      <span className={`text-[9px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider ${
-                        inv.status === 'PAID' 
-                          ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' 
-                          : inv.status === 'PARTIALLY_PAID'
-                          ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
-                          : 'bg-red-500/10 text-red-400 border border-red-500/20'
-                      }`}>
-                        {inv.status === 'PARTIALLY_PAID' ? 'Partially Paid' : inv.status === 'PAID' ? 'Paid' : 'Unpaid'}
-                      </span>
-                    </td>
-                    <td className="p-4 sm:p-5 text-right space-x-1.5 flex justify-end items-center">
-                      {/* Record Payment button */}
-                      {inv.status !== 'PAID' && (
-                        <button
-                          onClick={() => {
-                            setPayingInvoice(inv);
-                            setPaymentAmount(inv.balanceDue);
-                          }}
-                          className="flex items-center space-x-1 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 text-xs font-bold text-gray-200 hover:text-white cursor-pointer"
-                        >
-                          <Plus size={12} className="text-[#3B82F6]" />
-                          <span>Record Payment</span>
-                        </button>
-                      )}
-
-                      <button
-                        onClick={() => router.push(`/dashboard/billing/invoice/${inv._id}`)}
-                        className="p-2 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 text-gray-300 hover:text-white cursor-pointer"
-                        title="Print Invoice"
-                      >
-                        <Printer size={14} />
-                      </button>
-                    </td>
+            <div className="overflow-x-auto w-full">
+              <table className="w-full text-left text-xs sm:text-sm border-collapse min-w-[700px] sm:min-w-0">
+                <thead>
+                  <tr className="bg-white/5 border-b border-white/5 text-gray-400 uppercase text-[10px] font-bold tracking-wider">
+                    <th className="p-4 sm:p-5">Invoice #</th>
+                    <th className="p-4 sm:p-5">Patient</th>
+                    <th className="p-4 sm:p-5">Issue Date</th>
+                    <th className="p-4 sm:p-5">Total Amount</th>
+                    <th className="p-4 sm:p-5">Paid Amount</th>
+                    <th className="p-4 sm:p-5">Balance Due</th>
+                    <th className="p-4 sm:p-5">Status</th>
+                    <th className="p-4 sm:p-5 text-right">Actions</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="divide-y divide-white/5 text-gray-300">
+                  {sortedInvoices.map((inv) => (
+                    <tr key={inv._id} className="hover:bg-white/3 transition-colors">
+                      <td className="p-4 sm:p-5 font-bold text-white">
+                        <button
+                          onClick={() => router.push(`/dashboard/billing/invoice/${inv._id}`)}
+                          className="hover:text-[#3B82F6] transition-colors font-extrabold text-left cursor-pointer"
+                        >
+                          {inv.invoiceNumber}
+                        </button>
+                      </td>
+                      <td className="p-4 sm:p-5">
+                        {inv.patientId ? (
+                          <button
+                            onClick={() => router.push(`/dashboard/patients/${inv.patientId._id}`)}
+                            className="hover:text-[#3B82F6] hover:underline font-bold text-left cursor-pointer"
+                          >
+                            {inv.patientId.name}
+                          </button>
+                        ) : (
+                          <span className="italic text-gray-500">Deleted Patient</span>
+                        )}
+                      </td>
+                      <td className="p-4 sm:p-5 text-gray-200 font-extrabold text-xs tracking-wide">
+                        {formatDateToDMY(inv.issueDate)}
+                      </td>
+                      <td className="p-4 sm:p-5 font-bold text-white">₹{inv.totalAmount.toLocaleString('en-IN')}</td>
+                      <td className="p-4 sm:p-5 font-bold text-emerald-400">₹{(inv.amountPaid || 0).toLocaleString('en-IN')}</td>
+                      <td className="p-4 sm:p-5 font-bold text-white">
+                        {inv.balanceDue > 0 ? (
+                          <span className="text-red-400 font-semibold">₹{inv.balanceDue.toLocaleString('en-IN')}</span>
+                        ) : (
+                          <span className="text-emerald-400 font-semibold">₹0</span>
+                        )}
+                      </td>
+                      <td className="p-4 sm:p-5">
+                        <span className={`text-[9px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider ${
+                          inv.status === 'PAID' 
+                            ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' 
+                            : inv.status === 'PARTIALLY_PAID'
+                            ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
+                            : 'bg-red-500/10 text-red-400 border border-red-500/20'
+                        }`}>
+                          {inv.status === 'PARTIALLY_PAID' ? 'Partially Paid' : inv.status === 'PAID' ? 'Paid' : 'Unpaid'}
+                        </span>
+                      </td>
+                      <td className="p-4 sm:p-5 text-right space-x-1.5 flex justify-end items-center">
+                        {/* Record Payment button */}
+                        {inv.status !== 'PAID' && (
+                          <button
+                            onClick={() => {
+                              setPayingInvoice(inv);
+                              setPaymentAmount(inv.balanceDue);
+                            }}
+                            className="flex items-center space-x-1 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 text-xs font-bold text-gray-200 hover:text-white cursor-pointer"
+                          >
+                            <Plus size={12} className="text-[#3B82F6]" />
+                            <span>Record Payment</span>
+                          </button>
+                        )}
+
+                        <button
+                          onClick={() => router.push(`/dashboard/billing/invoice/${inv._id}`)}
+                          className="p-2 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 text-gray-300 hover:text-white cursor-pointer"
+                          title="Print Invoice"
+                        >
+                          <Printer size={14} />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         );
       })()}

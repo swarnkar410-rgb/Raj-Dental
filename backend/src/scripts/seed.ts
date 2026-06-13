@@ -42,7 +42,7 @@ const seed = async () => {
 
     console.log('Creating Admin Doctor...');
     const salt = await bcrypt.genSalt(10);
-    const passwordHash = await bcrypt.hash('password123', salt);
+    const passwordHash = await bcrypt.hash('manoj@456', salt);
     
     const doctor = await User.create({
       name: 'Dr. Manoj Kumar',
@@ -50,7 +50,7 @@ const seed = async () => {
       passwordHash,
       role: 'doctor'
     });
-    console.log(`Doctor created: ${doctor.email} (password: password123)`);
+    console.log(`Doctor created: ${doctor.email} (password: manoj@456)`);
 
     console.log('Seeding Working Hours / Weekly Recurring Schedules...');
     const defaultSchedules = [

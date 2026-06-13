@@ -135,35 +135,37 @@ export default function InvoiceDetailPage() {
 
         {/* Items Table */}
         <div className="py-8">
-          <table className="w-full text-left text-xs sm:text-sm border-collapse">
-            <thead>
-              <tr className="border-b border-white/10 print:border-gray-300 text-gray-400 print:text-gray-600 uppercase text-[9px] font-bold tracking-wider">
-                <th className="pb-3">Treatment / Procedure Details</th>
-                <th className="pb-3 text-center">Teeth</th>
-                <th className="pb-3 text-right">Amount (INR)</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-white/5 print:divide-gray-200 text-gray-300 print:text-black">
-              {invoice.treatmentIds && invoice.treatmentIds.length > 0 ? (
-                invoice.treatmentIds.map((item: any, idx: number) => (
-                  <tr key={idx} className="hover:bg-white/2">
-                    <td className="py-4">
-                      <div className="font-bold text-white print:text-black">{item.title}</div>
-                      <div className="text-xs text-gray-400 print:text-gray-600 mt-1">{item.notes}</div>
-                    </td>
-                    <td className="py-4 text-center font-semibold text-[#D4AF37] print:text-yellow-600">
-                      {item.teeth && item.teeth.length > 0 ? item.teeth.join(', ') : 'General'}
-                    </td>
-                    <td className="py-4 text-right font-bold">₹{item.totalAmount.toLocaleString('en-IN')}</td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan={3} className="py-4 text-center text-gray-500">No treatments mapped to this invoice.</td>
+          <div className="overflow-x-auto w-full">
+            <table className="w-full text-left text-xs sm:text-sm border-collapse min-w-[500px] sm:min-w-0">
+              <thead>
+                <tr className="border-b border-white/10 print:border-gray-300 text-gray-400 print:text-gray-600 uppercase text-[9px] font-bold tracking-wider">
+                  <th className="pb-3">Treatment / Procedure Details</th>
+                  <th className="pb-3 text-center">Teeth</th>
+                  <th className="pb-3 text-right">Amount (INR)</th>
                 </tr>
-              )}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-white/5 print:divide-gray-200 text-gray-300 print:text-black">
+                {invoice.treatmentIds && invoice.treatmentIds.length > 0 ? (
+                  invoice.treatmentIds.map((item: any, idx: number) => (
+                    <tr key={idx} className="hover:bg-white/2">
+                      <td className="py-4">
+                        <div className="font-bold text-white print:text-black">{item.title}</div>
+                        <div className="text-xs text-gray-400 print:text-gray-600 mt-1">{item.notes}</div>
+                      </td>
+                      <td className="py-4 text-center font-semibold text-[#D4AF37] print:text-yellow-600">
+                        {item.teeth && item.teeth.length > 0 ? item.teeth.join(', ') : 'General'}
+                      </td>
+                      <td className="py-4 text-right font-bold">₹{item.totalAmount.toLocaleString('en-IN')}</td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan={3} className="py-4 text-center text-gray-500">No treatments mapped to this invoice.</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
 
         {/* Summary calculations */}

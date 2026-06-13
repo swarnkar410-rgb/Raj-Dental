@@ -569,47 +569,49 @@ export default function AppointmentsPage() {
             {/* MONTHLY CALENDAR GRID */}
             {viewMode === 'Monthly' && (
               <div className="panel-card p-6 rounded-3xl border-white/5">
-                {/* Weekday Labels */}
-                <div className="grid grid-cols-7 gap-2 mb-2 text-center text-[10px] font-extrabold text-gray-400 uppercase tracking-widest">
-                  {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-                    <div key={day} className="py-2">{day}</div>
-                  ))}
-                </div>
+                <div className="overflow-x-auto w-full pb-2">
+                  {/* Weekday Labels */}
+                  <div className="grid grid-cols-7 gap-2 mb-2 text-center text-[10px] font-extrabold text-gray-400 uppercase tracking-widest min-w-[700px] md:min-w-0">
+                    {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
+                      <div key={day} className="py-2">{day}</div>
+                    ))}
+                  </div>
 
-                {/* Days Cells Grid */}
-                <div className="grid grid-cols-7 gap-2">
-                  {getMonthlyGridDays().map((day, idx) => {
-                    const details = getDayDetails(day.dateStr);
-                    const isSelected = selectedDate === day.dateStr;
+                  {/* Days Cells Grid */}
+                  <div className="grid grid-cols-7 gap-2 min-w-[700px] md:min-w-0">
+                    {getMonthlyGridDays().map((day, idx) => {
+                      const details = getDayDetails(day.dateStr);
+                      const isSelected = selectedDate === day.dateStr;
 
-                    return (
-                      <button
-                        key={idx}
-                        onClick={() => {
-                          setSelectedDate(day.dateStr);
-                          setViewMode('Daily');
-                        }}
-                        className={`min-h-[90px] p-2.5 rounded-2xl border text-left flex flex-col justify-between transition-all cursor-pointer group ${
-                          isSelected 
-                            ? 'bg-[#3B82F6]/20 border-[#3B82F6] shadow-[0_0_15px_rgba(59,130,246,0.25)]' 
-                            : day.isCurrentMonth
-                            ? 'bg-white/3 border-white/5 hover:border-white/15'
-                            : 'bg-transparent border-transparent opacity-25'
-                        }`}
-                      >
-                        <span className={`text-xs font-bold ${day.isCurrentMonth ? 'text-white' : 'text-gray-500'}`}>
-                          {day.dayNum}
-                        </span>
+                      return (
+                        <button
+                          key={idx}
+                          onClick={() => {
+                            setSelectedDate(day.dateStr);
+                            setViewMode('Daily');
+                          }}
+                          className={`min-h-[90px] p-2.5 rounded-2xl border text-left flex flex-col justify-between transition-all cursor-pointer group ${
+                            isSelected 
+                              ? 'bg-[#3B82F6]/20 border-[#3B82F6] shadow-[0_0_15px_rgba(59,130,246,0.25)]' 
+                              : day.isCurrentMonth
+                              ? 'bg-white/3 border-white/5 hover:border-white/15'
+                              : 'bg-transparent border-transparent opacity-25'
+                          }`}
+                        >
+                          <span className={`text-xs font-bold ${day.isCurrentMonth ? 'text-white' : 'text-gray-500'}`}>
+                            {day.dayNum}
+                          </span>
 
-                        {day.isCurrentMonth && (
-                          <div className={`mt-2 text-[9px] font-extrabold px-2 py-1.5 rounded-lg border text-center uppercase tracking-wider w-full ${details.color}`}>
-                            {details.status === 'active' && <div className="text-[7px] text-gray-400 font-semibold mb-0.5">Booked</div>}
-                            {details.label}
-                          </div>
-                        )}
-                      </button>
-                    );
-                  })}
+                          {day.isCurrentMonth && (
+                            <div className={`mt-2 text-[9px] font-extrabold px-2 py-1.5 rounded-lg border text-center uppercase tracking-wider w-full ${details.color}`}>
+                              {details.status === 'active' && <div className="text-[7px] text-gray-400 font-semibold mb-0.5">Booked</div>}
+                              {details.label}
+                            </div>
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
             )}
